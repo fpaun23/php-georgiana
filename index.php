@@ -31,14 +31,17 @@ require_once './App/bootstrapping.php';
 </body>
 </html>
 <?php
+
   $name_prod = $_POST['name_prod'];
   $price = $_POST['price'];
+  $product = new Products();
+  $product->setPrice($price);
 
   if ($price) {
     $instance = ConnectDb::getInstance();
     $conn = $instance->getConnection();
     $stmt= $conn->prepare("UPDATE products SET price=$price WHERE name_prod='$name_prod'");
     $stmt->execute();
-    echo $stmt->rowCount() . " records UPDATED successfully";
+    echo $stmt->rowCount() . " Price:".$product->getPrice();
   }
 ?>
