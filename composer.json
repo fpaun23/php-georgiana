@@ -1,0 +1,19 @@
+{
+    "name": "georgiana/php-georgiana",
+    "description": "Task 1",
+    "type": "library",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Georgiana Panaete",
+            "email": "96georgiana.panaete@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "classmap": [
+            "App/Models"
+        ]
+    }
+}
