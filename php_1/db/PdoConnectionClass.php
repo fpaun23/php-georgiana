@@ -1,5 +1,5 @@
 <?php
-require_once 'Config.php';
+require_once __DIR__ . '/../config/Config.php';
 
 class PdoConnectionClass
 {
