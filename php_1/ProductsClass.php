@@ -1,6 +1,6 @@
 <?php
 
-require_once('ProductsInterface.php');
+require_once 'ProductsInterface.php';
 
 class ProductsClass implements ProductsInterface
 {

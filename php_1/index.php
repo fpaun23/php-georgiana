@@ -1,6 +1,6 @@
 <?php
-require_once("db/PdoConnectionClass.php");
-require_once("CustomerControllerClass.php");
+require_once "db/PdoConnectionClass.php";
+require_once "CustomerControllerClass.php";
 
 $data = new PdoConnectionClass;
 // echo $data->update("products",[2,"rada9211",311,2]);
