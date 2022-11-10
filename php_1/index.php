@@ -13,8 +13,9 @@ echo "===========";
 echo "===========";
 
 $customer = new CustomerControllerClass("customer");
+
 // var_dump($customer->getCustomers());
-// $customer->insertCustomer(["test1106@gmail.com"]);
+// $customer->insertCustomer(["test001@gmail.com"]);
 echo "===========";
-// $customer->updateCustomer(["test000@gmail.com",5]);
-$customer->deleteCustomer(5);
+// $customer->updateCustomer(["test0001@gmail.com",11]);
+// $customer->deleteCustomer(1);

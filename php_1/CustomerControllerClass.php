@@ -4,37 +4,35 @@ require_once 'db/PdoConnectionClass.php';
 
 class CustomerControllerClass
 {
-    protected string $tableName;
+    protected $tableName;
+    protected $conn;
 
     public function __construct(string $tableName)
     {
         $this->tableName = $tableName;
+        $this->conn = new PdoConnectionClass();
     }
 
     public function getCustomers(): array
     {
-        $conn = new PdoConnectionClass();
         $customerTable = $this->tableName;
-        return $conn->get($customerTable);
+        return $this->conn->get($customerTable);
     }
 
     public function insertCustomer(array $insertData): int
     {
-        $conn = new PdoConnectionClass();
-        return $conn->insert($this->tableName, $insertData);
+        return $this->conn->insert($this->tableName, $insertData);
     }
 
     public function updateCustomer(array $updateData): bool
     {
-        $conn = new PdoConnectionClass();
-        return $conn->update($this->tableName, $updateData);
+        return $this->conn->update($this->tableName, $updateData);
 
     }
 
     public function deleteCustomer(int $customerId): bool
     {
-        $conn = new PdoConnectionClass();
-        return $conn->delete($this->tableName, $customerId);
+        return $this->conn->delete($this->tableName, $customerId);
 
     }
 }
