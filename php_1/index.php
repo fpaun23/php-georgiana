@@ -1,6 +1,8 @@
 <?php
 require_once "db/PdoConnectionClass.php";
+require_once "db/MysqliConnectionClass.php";
 require_once "CustomerControllerClass.php";
+require_once "db/DbConnectionInterface.php";
 
 $data = new PdoConnectionClass;
 // echo $data->update("products",[2,"rada9211",311,2]);
@@ -12,10 +14,13 @@ echo "===========";
 // echo $data->delete("customer",2);
 echo "===========";
 
-$customer = new CustomerControllerClass("customer");
+$conn = new MysqliConnectionClass();
+// $conn = new PdoConnectionClass();
+
+$customer = new CustomerControllerClass($conn, "customer");
 
 // var_dump($customer->getCustomers());
-// $customer->insertCustomer(["test001@gmail.com"]);
+// echo $customer->insertCustomer(["testtest139@gmail.com"]);
 echo "===========";
-// $customer->updateCustomer(["test0001@gmail.com",11]);
-// $customer->deleteCustomer(1);
+$customer->updateCustomer(["test00011112@gmail.com",10]);
+// $customer->deleteCustomer(69);

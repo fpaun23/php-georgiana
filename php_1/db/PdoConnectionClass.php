@@ -1,26 +1,20 @@
 <?php
 require_once __DIR__ . '/../config/Config.php';
+require_once 'DbConnectionInterface.php';
 
-class PdoConnectionClass
+class PdoConnectionClass implements DbConnectionInterface
 {
-    private $serverName = Config::HOST;
-    private $database = Config::DATABASE;
-    private $user = Config::USER;
-    private $pass = Config::PASSWORD;
     private $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC);
     protected $con;
-    protected $db;
-
     public function __construct()
     {
-        $this->db = $this->connect();
+        $this->connect();
     }
 
-    private function connect()
+    public function connect()
     {
         try {
-            $this->con = new PDO("mysql:host=$this->serverName;dbname=$this->database", $this->user, $this->pass, $this->options);
-            return $this->con;
+            return new PDO('mysql:host='.Config::HOST.';dbname='.Config::DATABASE, Config::USER, Config::PASSWORD, $this->options);
         } catch (PDOException $e) {
             echo "There is some problem in connection: " . $e->getMessage();
         }
@@ -30,7 +24,7 @@ class PdoConnectionClass
     {
         $data = [];
         $sql = "SELECT * FROM $tableName";
-        foreach ($this->db->query($sql) as $row) {
+        foreach ($this->connect()->query($sql) as $row) {
             $data[] = $row;
         }
         return $data;
@@ -58,7 +52,7 @@ class PdoConnectionClass
                 $sql = "UPDATE $tableName SET `color`= $updateData[0] WHERE `id_color` = $updateData[1]";
                 break;
         }
-        $affectedrows = $this->db->exec($sql);
+        $affectedrows = $this->connect()->exec($sql);
         if (isset($affectedrows)) {
             return true;
         } else {
@@ -76,9 +70,7 @@ class PdoConnectionClass
                 $sql = "INSERT INTO $tableName (`email`) VALUES ('$insertData[0]')";
                 break;
         }
-        $this->db->exec($sql);
-
-        return $this->db->lastInsertId();
+        return $this->connect()->exec($sql)->lastInsertId();
     }
 
     public function delete($tableName, int $recordId): bool
@@ -91,7 +83,7 @@ class PdoConnectionClass
                 $sql = "DELETE FROM $tableName WHERE `id` = $recordId";
                 break;
         }
-        $affectedrows = $this->db->exec($sql);
+        $affectedrows = $this->connect()->exec($sql);
         if (isset($affectedrows)) {
             return true;
         } else {

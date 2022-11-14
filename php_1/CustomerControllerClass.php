@@ -1,16 +1,18 @@
 <?php
 
 require_once 'db/PdoConnectionClass.php';
+require_once 'db/PdoConnectionClass.php';
+
 
 class CustomerControllerClass
 {
     protected $tableName;
     protected $conn;
 
-    public function __construct(string $tableName)
+    public function __construct(DbConnectionInterface $conn, string $tableName)
     {
         $this->tableName = $tableName;
-        $this->conn = new PdoConnectionClass();
+        $this->conn = $conn;
     }
 
     public function getCustomers(): array
